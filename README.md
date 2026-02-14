@@ -208,7 +208,7 @@ def truncate_text(text, max_length=1024):
 # Embed creation functions with black theme and UnixNodes branding
 def create_embed(title, description="", color=0x1a1a1a):
     embed = discord.Embed(
-        title=truncate_text(f"⭐ UnixNodes - {title}", 256),
+        title=truncate_text(f"⭐ ShadowNodes - {title}", 256),
         description=truncate_text(description, 4096),
         color=color
     )
@@ -243,7 +243,7 @@ def is_admin():
         user_id = str(ctx.author.id)
         if user_id == str(MAIN_ADMIN_ID) or user_id in admin_data.get("admins", []):
             return True
-        raise commands.CheckFailure("You need admin permissions to use this command. Contact UnixNodes support.")
+        raise commands.CheckFailure("You need admin permissions to use this command. Contact ShadowNodes support.")
     return commands.check(predicate)
 
 def is_main_admin():
@@ -521,7 +521,7 @@ def get_uptime():
 @bot.event
 async def on_ready():
     logger.info(f'{bot.user} has connected to Discord!')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="UnixNodes VPS Manager"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="ShadowNodes VPS Manager"))
     logger.info("UnixNodes Bot is ready!")
 
 @bot.event
@@ -533,7 +533,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.BadArgument):
         await ctx.send(embed=create_error_embed("Invalid Argument", "Please check your input and try again."))
     elif isinstance(error, commands.CheckFailure):
-        error_msg = str(error) if str(error) else "You need admin permissions for this command. Contact UnixNodes support."
+        error_msg = str(error) if str(error) else "You need admin permissions for this command. Contact ShadowNodes support."
         await ctx.send(embed=create_error_embed("Access Denied", error_msg))
     elif isinstance(error, discord.NotFound):
         await ctx.send(embed=create_error_embed("Error", "The requested resource was not found. Please try again."))
@@ -545,7 +545,7 @@ async def on_command_error(ctx, error):
 @bot.command(name='ping')
 async def ping(ctx):
     latency = round(bot.latency * 1000)
-    embed = create_success_embed("Pong!", f"UnixNodes Bot latency: {latency}ms")
+    embed = create_success_embed("Pong!", f"ShadowNodes Bot latency: {latency}ms")
     await ctx.send(embed=embed)
 
 @bot.command(name='uptime')
